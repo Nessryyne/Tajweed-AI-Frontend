@@ -27,19 +27,3 @@ final class SignUpModelResponse extends ModelingProtocol {
   @override
   List<Object?> get props => [success, info];
 }
-
-// final class TokenData with EquatableMixin {
-//   final String access;
-//   final String refresh;
-
-//   const TokenData({required this.access, required this.refresh});
-
-//   factory TokenData.from(Map<String, dynamic> json) =>
-//       TokenData(access: json['access'] ?? '', refresh: json['refresh'] ?? '');
-
-//   @override
-//   List<Object?> get props => [access, refresh];
-
-//   @override
-//   String toString() => 'TokenData(access: $access, refresh: $refresh)';
-// }
