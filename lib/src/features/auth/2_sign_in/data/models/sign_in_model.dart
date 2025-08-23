@@ -1,29 +1,44 @@
 import 'package:generic_requester/generic_requester.dart';
-import 'package:tajweed_ai/src/features/auth/2_sign_in/data/models/user.dart';
+import '../../../3_sign_up/data/models/activate_account_response.dart';
 
-final class SignInModel extends ModelingProtocol {
-  final String status;
+final class SignInModelResponse extends ModelingProtocol {
+  final bool success;
   final String message;
-  final User? data;
+  final TokenData? data;
+  final String? error;
 
-  SignInModel({
-    required this.status,
+  SignInModelResponse({
+    required this.success,
     required this.message,
-    required this.data,
+    this.data,
+    this.error,
   });
 
-  factory SignInModel.empty() =>
-      SignInModel(status: '', message: '', data: null);
+  factory SignInModelResponse.empty() =>
+      SignInModelResponse(success: false, message: '');
 
   @override
   fromJson(json) {
-    return SignInModel(
-      status: json?['status'],
-      message: json?['message'],
-      data: json?['data'] != null ? User.from(json['data']) : null,
-    );
+    final isSuccess = json?['success'] ?? false;
+    final message = json?['info'] ?? 'Unknown response';
+
+    if (isSuccess && json?['data'] != null) {
+      // Success response - tokens are in data object
+      return SignInModelResponse(
+        success: true,
+        message: message,
+        data: TokenData.fromJson(json['data']),
+      );
+    } else {
+      // Error response - has error field
+      return SignInModelResponse(
+        success: false,
+        message: message,
+        error: json?['error'],
+      );
+    }
   }
 
   @override
-  List<Object?> get props => [status, message, data];
+  List<Object?> get props => [success, message, data, error];
 }

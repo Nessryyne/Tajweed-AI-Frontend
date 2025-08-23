@@ -14,9 +14,24 @@ extension on SignInBloc {
         .then(
           (response) => response.fold(
             (exception) => _handleSignInFailure(exception, emit),
-            (data) => _handleSignInSuccess(data, emit),
+            (data) => _saveTokensAndEmitSuccess(data, emit),
           ),
         );
+  }
+
+  Future<void> _saveTokensAndEmitSuccess(
+    SignInModelResponse data,
+    Emitter<SignInState> emit,
+  ) async {
+    if (data.success && data.data != null) {
+      await _signInDataSource.saveTokens(
+        accessToken: data.data!.access,
+        refreshToken: data.data!.refresh,
+      );
+      emit(Success(data.message));
+    } else {
+      emit(Error.from(Exception(data.message)));
+    }
   }
 
   Future<void> _signInWithApple(
@@ -39,16 +54,6 @@ extension on SignInBloc {
   ) async {
     //TODO: Implement sign in with facebook
   }
-}
-
-void _handleSignInSuccess(SignInModel response, Emitter<SignInState> emit) {
-  if (response.data != null) {
-    emit(Success(response.message));
-    return;
-    //! Dispatch NavigateToHome goRouter ( globalContext.push)
-    //TODO: globalContext.go(HomeScreen.path);
-  }
-  throw Exception(response.message);
 }
 
 void _handleSignInFailure(Exception exception, Emitter<SignInState> emit) =>

@@ -3,15 +3,10 @@ part of '../sign_in_datasource.dart';
 /// Creates mock sign in data
 ///
 Map<String, dynamic> _mockSignInWithEmailAndPassword() => {
-  "status": "success",
-  "message": "Sign in successful",
+  "success": true,
+  "info": "Sign in successful",
   "data": {
-      "id": "123",
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "phone": "+1234567890",
-      "role": "admin",
-      "createdAt": DateTime.now().subtract(const Duration(hours: 8)).toIso8601String(),
-      "updatedAt": DateTime.now().subtract(const Duration(hours: 8)).toIso8601String(),
+    "access": "mock_access_token_123",
+    "refresh": "mock_refresh_token_456",
   },
 };
