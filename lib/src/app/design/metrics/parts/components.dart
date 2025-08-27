@@ -3,8 +3,9 @@ part of '../app_metrics.dart';
 class _Drawer {
   const _Drawer._();
 
-  final double width = 0;
-  final double radius = 10;
+  final double horizontalPadding = 15;
+  final double verticalPadding = 20;
+  final double topPadding = 40;
 }
 
 class _Cards {

@@ -10,7 +10,16 @@ class MainBloc extends BaseBloc<MainEvents, MainStates> {
     '/practice',
     '/progress',
   ];
+  final List<String> screenTitles = [
+    'Tajweed AI',
+    'Learn',
+    'Quran',
+    'Practice',
+    'Progress',
+  ];
   int currentIndex = 0;
+
+  String get screenTitle => screenTitles[currentIndex];
 
   //!Event caller
   void changeTab(int index) => add(ChangeTabEvent(index));
