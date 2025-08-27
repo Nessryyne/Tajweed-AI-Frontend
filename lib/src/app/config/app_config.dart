@@ -26,7 +26,7 @@ abstract final class AppConfig {
       Debugger.green(refreshToken);
 
       return (accessToken != null && refreshToken != null)
-          ? signUpRoute.path
+          ? '/home'
           : signInRoute.path;
     } catch (e) {
       Debugger.red(e.toString());
