@@ -1,12 +1,11 @@
 //? Base needed imports
 import '../../../../../base/screens/exports.dart';
 
-//? Widgets Imports
 import '/src/features/auth/2_sign_in/view/widgets/sign_in_form.dart';
 import '../../../common/auth_body.dart';
 
-//? Utils needed imports
 import '../../../3_sign_up/router/sign_up_route.dart';
+import '../../../4_forgot_password/router/forgot_password_route.dart';
 
 //? Bloc needed imports
 import '../../vm/bloc/sign_in_bloc.dart';
@@ -39,9 +38,7 @@ class SignInBody extends SubWidget<SignInBloc> {
       emailFocusNode: bloc.email.node,
       passwordController: bloc.password.controller,
       passwordFocusNode: bloc.password.node,
-      onForgotPassword: () {
-        //TODO: Go to forgot password
-      },
+      onForgotPassword: () => globalContext.push(forgotPasswordRoute.path),
     ),
   );
 }

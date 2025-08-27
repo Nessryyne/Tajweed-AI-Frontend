@@ -1,6 +1,6 @@
 enum Environment {
   mock(),
-  dev(baseUrl: "http://10.220.251.168:8000/api/"),
+  dev(baseUrl: "https://tajweed-ai-backend.onrender.com/api/"),
   preprod(baseUrl: "https://tajeewd-ai.preprod.com/api/"),
   prod(baseUrl: "https://tajeewd-ai.prod.com/api/"),
   test(baseUrl: "https://testing.com/api/");
