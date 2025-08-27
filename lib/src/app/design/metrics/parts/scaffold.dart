@@ -6,4 +6,5 @@ class _Scaffold {
   final double topBodyPadding = 25;
   final double horizontalBodyPadding = 20;
   final double bottomBodyPadding = 50;
+  final double bottomNavBarHeight = 70;
 }

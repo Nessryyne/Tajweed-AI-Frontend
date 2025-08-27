@@ -2,7 +2,6 @@ import '../../../../../base/screens/exports.dart';
 import '../../binding/main_deps.dart';
 import '../../vm/bloc/main_bloc.dart';
 import '../../vm/states/main_states.dart';
-import '../../vm/events/main_events.dart';
 import 'widgets/bottom_nav_bar.dart';
 
 class MainScreen extends Feature<MainBloc, MainStates> {
@@ -20,16 +19,12 @@ class MainScreen extends Feature<MainBloc, MainStates> {
 
   @override
   Widget build(BuildContext context, MainStates state) {
-    return Scaffold(body: child, bottomNavigationBar: _BottomNavigationBar());
+    return Scaffold(
+      body: child,
+      bottomNavigationBar: SimpleBottomNavBar(
+        selectedIndex: bloc.currentIndex,
+        onTap: bloc.changeTab,
+      ),
+    );
   }
-}
-
-class _BottomNavigationBar extends SubWidget<MainBloc> {
-  const _BottomNavigationBar({super.key});
-
-  @override
-  Widget build(BuildContext context) => SimpleBottomNavBar(
-    selectedIndex: bloc.currentIndex,
-    onTap: bloc.changeTab,
-  );
 }
