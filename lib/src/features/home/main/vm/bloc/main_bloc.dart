@@ -21,6 +21,10 @@ class MainBloc extends BaseBloc<MainEvents, MainStates> {
   final selectedLanguage = Observable<String>("English");
   int currentIndex = 0;
 
+  String get userName => 'John Doe';
+  String get userEmail => 'john.doe@example.com';
+  String get photoUrl => 'https://via.placeholder.com/150';
+
   String get screenTitle => screenTitles[currentIndex];
 
   //!Event caller

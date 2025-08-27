@@ -15,7 +15,7 @@ class _AccountSection extends StatelessWidget {
           iconColor: AppColors.info,
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         ),
-        const SizedBox(height: 8),
+        VerticalSpacing(AppMetrics.spacing.xs),
         const Divider(),
       ],
     );
@@ -39,9 +39,9 @@ class PreferencesSection extends StatelessWidget {
       children: [
         _SectionHeader(title: 'Preferences', color: AppColors.success),
         _NotificationItem(),
-        const SizedBox(height: 8),
+        VerticalSpacing(AppMetrics.spacing.xs),
         _ThemeItem(),
-        const SizedBox(height: 8),
+        VerticalSpacing(AppMetrics.spacing.xs),
         Observer(
           observes: selectedLanguage,
           builder: (context, value) => _LanguageItem(
@@ -50,7 +50,7 @@ class PreferencesSection extends StatelessWidget {
             onChanged: onLanguageChanged,
           ),
         ),
-        const SizedBox(height: 8),
+        VerticalSpacing(AppMetrics.spacing.xs),
         const Divider(),
       ],
     );

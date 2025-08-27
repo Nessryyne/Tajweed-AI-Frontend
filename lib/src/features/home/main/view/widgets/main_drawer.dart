@@ -11,37 +11,35 @@ class MainDrawer extends SubWidget<MainBloc> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            // Profile Header Section
-            ProfileHeader(
-              userName: 'John Doe',
-              userEmail: 'john.doe@example.com',
-            ),
-            // Scrollable Content Section
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  const _AccountSection(),
-                  const VerticalSpacing(8),
-                  PreferencesSection(
-                    languages: bloc.languages,
-                    selectedLanguage: bloc.selectedLanguage,
-                    onLanguageChanged: (value) => bloc.changeLanguage(value),
-                  ),
-                  const VerticalSpacing(8),
-                  const _SupportSection(),
-                ],
-              ).symmetricPadding(horizontal: 16, vertical: 8),
-            ).expanded(),
+      child: Column(
+        children: [
+          // Profile Header Section
+          ProfileHeader(
+            userName: bloc.userName,
+            userEmail: bloc.userEmail,
+            photoUrl: bloc.photoUrl,
+          ),
+          // Scrollable Content Section
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const _AccountSection(),
+                const VerticalSpacing(8),
+                PreferencesSection(
+                  languages: bloc.languages,
+                  selectedLanguage: bloc.selectedLanguage,
+                  onLanguageChanged: (value) => bloc.changeLanguage(value),
+                ),
+                const VerticalSpacing(8),
+                const _SupportSection(),
+              ],
+            ).symmetricPadding(horizontal: 16, vertical: 8),
+          ).expanded(),
 
-            _LogoutSection(onTap: bloc.logout),
-            const _AppVersionFooter(),
-          ],
-        ),
-      ),
+          _LogoutSection(onTap: bloc.logout),
+          const _AppVersionFooter(),
+        ],
+      ).decorate(color: Colors.white),
     );
   }
 }
