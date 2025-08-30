@@ -16,4 +16,35 @@ extension MainBlocUc on MainBloc {
       if (globalContext.mounted) globalContext.go(signInRoute.path);
     }
   }
+
+  void _onChangeLanguage(ChangeLanguageEvent event, Emitter<MainStates> emit) {
+    if (event.language != null) {
+      selectedLanguage.value = event.language!;
+
+      // Get language code and country code
+      final languageCode = LocalizationManager.instance.getLanguageCode(
+        event.language!,
+      );
+      final countryCode = LocalizationManager.instance.getCountryCode(
+        languageCode,
+      );
+
+      LocalizationManager.instance.changeLanguage(
+        languageCode,
+        countryCode,
+        event.context,
+      );
+      emit(LanguageChanged());
+    }
+  }
+
+  void _onChangeTab(ChangeTabEvent event, Emitter<MainStates> emit) {
+    currentIndex = event.index;
+    emit(
+      MainNavigationChanged(
+        currentIndex: event.index,
+        currentRoute: routes[event.index],
+      ),
+    );
+  }
 }

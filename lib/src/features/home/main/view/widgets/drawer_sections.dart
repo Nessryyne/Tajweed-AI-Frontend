@@ -1,7 +1,8 @@
 part of 'main_drawer.dart';
 
 class _AccountSection extends StatelessWidget {
-  const _AccountSection({super.key});
+  final VoidCallback onTap;
+  const _AccountSection({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _AccountSection extends StatelessWidget {
         VerticalSpacing(AppMetrics.spacing.xs),
         const Divider(),
       ],
-    );
+    ).onTap(onTap);
   }
 }
 

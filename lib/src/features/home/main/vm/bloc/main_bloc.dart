@@ -35,44 +35,15 @@ class MainBloc extends BaseBloc<MainEvents, MainStates> {
   void changeTab(int index) => add(ChangeTabEvent(index));
   void changeLanguage(String? language) =>
       add(ChangeLanguageEvent(language, globalContext));
-
   void logout() => add(LogoutEvent());
+  void changeToProfileSettings() {
+    //TODO:     globalContext.go("/profile-settings");
+  }
 
   MainBloc(this.mainDataSource) : super(MainInitial()) {
     on<ChangeTabEvent>(_onChangeTab);
     on<ChangeLanguageEvent>(_onChangeLanguage);
     on<LogoutEvent>(_logout);
     _initializeLanguage();
-  }
-
-  void _onChangeLanguage(ChangeLanguageEvent event, Emitter<MainStates> emit) {
-    if (event.language != null) {
-      selectedLanguage.value = event.language!;
-
-      // Get language code and country code
-      final languageCode = LocalizationManager.instance.getLanguageCode(
-        event.language!,
-      );
-      final countryCode = LocalizationManager.instance.getCountryCode(
-        languageCode,
-      );
-
-      LocalizationManager.instance.changeLanguage(
-        languageCode,
-        countryCode,
-        event.context,
-      );
-      emit(LanguageChanged());
-    }
-  }
-
-  void _onChangeTab(ChangeTabEvent event, Emitter<MainStates> emit) {
-    currentIndex = event.index;
-    emit(
-      MainNavigationChanged(
-        currentIndex: event.index,
-        currentRoute: routes[event.index],
-      ),
-    );
   }
 }

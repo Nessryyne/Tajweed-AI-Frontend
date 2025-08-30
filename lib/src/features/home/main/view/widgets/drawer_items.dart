@@ -6,16 +6,16 @@ class _SectionHeader extends StatelessWidget {
   const _SectionHeader({super.key, required this.title, this.color});
 
   @override
-  Widget build(BuildContext context) => Align(
-    alignment: LocalizationManager.instance.isRTL
-        ? Alignment.centerRight
-        : Alignment.centerLeft,
-    child: Text(
-      title,
-      style: AppStyles.subtitle.bold().copyWith(
-        color: color ?? AppColors.primary,
+  Widget build(BuildContext context) => Row(
+    children: [
+      Text(
+        title,
+        style: AppStyles.subtitle.bold().copyWith(
+          color: color ?? AppColors.primary,
+        ),
       ),
-    ),
+      const Spacer(),
+    ],
   ).symmetricPadding(vertical: 8, horizontal: 4);
 }
 
