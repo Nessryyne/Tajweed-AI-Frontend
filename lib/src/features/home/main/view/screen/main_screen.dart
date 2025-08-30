@@ -20,13 +20,16 @@ class MainScreen extends Feature<MainBloc, MainStates> {
 
   @override
   Widget build(BuildContext context, MainStates state) {
-    return Scaffold(
-      drawer: const MainDrawer(),
-      appBar: AppBar(title: Text(bloc.screenTitle)),
-      body: child,
-      bottomNavigationBar: SimpleBottomNavBar(
-        selectedIndex: bloc.currentIndex,
-        onTap: bloc.changeTab,
+    return Observer(
+      observes: bloc.selectedLanguage,
+      builder: (_, _) => Scaffold(
+        drawer: MainDrawer(),
+        appBar: AppBar(title: Text(bloc.screenTitle)),
+        body: child,
+        bottomNavigationBar: SimpleBottomNavBar(
+          selectedIndex: bloc.currentIndex,
+          onTap: bloc.changeTab,
+        ),
       ),
     );
   }
