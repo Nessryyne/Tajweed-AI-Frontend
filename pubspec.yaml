@@ -16,6 +16,7 @@ dependencies:
     path: packages/cg_core_defs
   generic_requester:
     path: packages/generic_requester
+  easy_localization: ^3.0.5
 
   get_it: ^8.2.0
   flutter_bloc: ^9.1.1
@@ -43,6 +44,7 @@ flutter:
     - assets/images/    
     - assets/json/
     - assets/fonts/
+    - assets/translations/
 
 #= Flutter Launcher Icons
 flutter_launcher_icons:
