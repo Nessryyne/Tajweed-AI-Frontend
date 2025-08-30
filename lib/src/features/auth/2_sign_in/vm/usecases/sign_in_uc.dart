@@ -29,6 +29,7 @@ extension on SignInBloc {
         refreshToken: data.data!.refresh,
       );
       emit(Success(data.message));
+      if (globalContext.mounted) globalContext.go("/home");
     } else {
       emit(Error.from(Exception(data.message)));
     }
