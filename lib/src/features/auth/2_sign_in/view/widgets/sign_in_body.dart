@@ -1,4 +1,6 @@
 //? Base needed imports
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../../base/screens/exports.dart';
 
 import '/src/features/auth/2_sign_in/view/widgets/sign_in_form.dart';
@@ -17,17 +19,17 @@ class SignInBody extends SubWidget<SignInBloc> {
 
   @override
   Widget build(BuildContext context) => AuthBody(
-    buttonTitle: "Sign In",
+    buttonTitle: LocaleKeys.auth_sign_in.tr(),
     onButtonTap: bloc.signInWithEmailAndPassword,
     isLoading: state is Loading,
     showOrDivider: true,
     showSocialLogin: true,
     showGuestOption: true,
-    accountQuestionFirstText: "Don't have an Account? ",
-    accountQuestionSecondText: "create one",
+    accountQuestionFirstText: LocaleKeys.auth_dont_have_account.tr(),
+    accountQuestionSecondText: LocaleKeys.auth_create_one.tr(),
     onAccountQuestionTap: () => globalContext.go(signUpRoute.path),
-    guestQuestionFirstText: "Or continue as ",
-    guestQuestionSecondText: "Guest",
+    guestQuestionFirstText: LocaleKeys.auth_or_continue_as.tr(),
+    guestQuestionSecondText: LocaleKeys.auth_guest.tr(),
     onGuestQuestionTap: bloc.continueAsGuest,
     onGoogleTap: bloc.signInWithGoogle,
     onFacebookTap: bloc.signInWithFacebook,

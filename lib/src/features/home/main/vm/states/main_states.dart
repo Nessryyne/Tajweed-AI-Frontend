@@ -11,3 +11,9 @@ final class MainNavigationChanged extends MainStates {
     required this.currentRoute,
   });
 }
+
+final class LanguageChanged extends MainStates {}
+
+final class LogoutLoading extends MainStates {}
+
+final class LogoutSuccess extends MainStates {}

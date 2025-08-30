@@ -1,6 +1,11 @@
 import '../../../../../base/bloc/exports.dart';
+import '../../../../../core/managers/localization_manager.dart';
+import '../../../../auth/2_sign_in/router/sign_in_route.dart';
+import '../../datasource/main_datasource.dart';
 import '../events/main_events.dart';
 import '../states/main_states.dart';
+
+part '../usecases/main_bloc_uc.dart';
 
 class MainBloc extends BaseBloc<MainEvents, MainStates> {
   final List<String> routes = [
@@ -10,42 +15,55 @@ class MainBloc extends BaseBloc<MainEvents, MainStates> {
     '/practice',
     '/progress',
   ];
-  final List<String> screenTitles = [
-    'Tajweed AI',
-    'Learn',
-    'Quran',
-    'Practice',
-    'Progress',
-  ];
-  final List<String> languages = ['English', 'French', 'Arabic'];
+
+  // Get languages from localization manager
+  List<String> get languages => LocalizationManager.instance
+      .getAvailableLanguages()
+      .map((lang) => lang['name']!)
+      .toList();
+
   final selectedLanguage = Observable<String>("English");
   int currentIndex = 0;
-
+  final MainDataSource mainDataSource;
   String get userName => 'John Doe';
   String get userEmail => 'john.doe@example.com';
   String get photoUrl => 'https://via.placeholder.com/150';
 
-  String get screenTitle => screenTitles[currentIndex];
+  String get screenTitle => routes[currentIndex].substring(1).toUpperCase();
 
   //!Event caller
   void changeTab(int index) => add(ChangeTabEvent(index));
-  void changeLanguage(String? language) => add(ChangeLanguageEvent(language));
+  void changeLanguage(String? language) =>
+      add(ChangeLanguageEvent(language, globalContext));
 
   void logout() => add(LogoutEvent());
 
-  MainBloc() : super(MainInitial()) {
+  MainBloc(this.mainDataSource) : super(MainInitial()) {
     on<ChangeTabEvent>(_onChangeTab);
     on<ChangeLanguageEvent>(_onChangeLanguage);
-    on<LogoutEvent>(_onLogout);
+    on<LogoutEvent>(_logout);
+    _initializeLanguage();
   }
 
   void _onChangeLanguage(ChangeLanguageEvent event, Emitter<MainStates> emit) {
-    selectedLanguage.value = event.language ?? selectedLanguage.value;
-  }
+    if (event.language != null) {
+      selectedLanguage.value = event.language!;
 
-  void _onLogout(LogoutEvent event, Emitter<MainStates> emit) {
-    // TODO: Logout the user
-    emit(MainInitial());
+      // Get language code and country code
+      final languageCode = LocalizationManager.instance.getLanguageCode(
+        event.language!,
+      );
+      final countryCode = LocalizationManager.instance.getCountryCode(
+        languageCode,
+      );
+
+      LocalizationManager.instance.changeLanguage(
+        languageCode,
+        countryCode,
+        event.context,
+      );
+      emit(LanguageChanged());
+    }
   }
 
   void _onChangeTab(ChangeTabEvent event, Emitter<MainStates> emit) {

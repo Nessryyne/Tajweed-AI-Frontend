@@ -1,6 +1,7 @@
 import '../../../../../base/screens/exports.dart';
 import '../../../../../utils/input_validator.dart';
 import '../../../../common/widgets/form_input.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'forgot_password_button.dart';
 
 class SignInForm extends StatelessWidget {
@@ -31,8 +32,8 @@ class SignInForm extends StatelessWidget {
         children: [
           //$ Inputs
           FormInput(
-            label: 'Email',
-            hint: 'Enter your email',
+            label: LocaleKeys.auth_email.tr(),
+            hint: LocaleKeys.auth_enter_email.tr(),
             type: FormInputType.email,
             controller: emailController,
             focusNode: emailFocusNode,
@@ -42,8 +43,8 @@ class SignInForm extends StatelessWidget {
           VerticalSpacing(AppMetrics.spacing.md),
           FormInput(
             type: FormInputType.password,
-            label: 'Password',
-            hint: 'Enter your password',
+            label: LocaleKeys.auth_password.tr(),
+            hint: LocaleKeys.auth_enter_password.tr(),
             focusNode: passwordFocusNode,
             controller: passwordController,
             validator: InputValidators.validateLoginPassword,

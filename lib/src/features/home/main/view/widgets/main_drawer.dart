@@ -1,6 +1,8 @@
 import 'package:tajweed_ai/src/features/home/export.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../../base/screens/exports.dart';
+import '../../../../../core/managers/localization_manager.dart';
 import 'profile_header.dart';
 part 'drawer_items.dart';
 part 'drawer_sections.dart';
@@ -36,7 +38,10 @@ class MainDrawer extends SubWidget<MainBloc> {
             ).symmetricPadding(horizontal: 16, vertical: 8),
           ).expanded(),
 
-          _LogoutSection(onTap: bloc.logout),
+          _LogoutSection(
+            onTap: bloc.logout,
+            isLoading: bloc.state is LogoutLoading,
+          ),
           const _AppVersionFooter(),
         ],
       ).decorate(color: Colors.white),

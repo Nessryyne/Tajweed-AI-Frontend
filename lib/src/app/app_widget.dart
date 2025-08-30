@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import '../base/screens/exports.dart';
 import 'router/app_router.dart';
 
@@ -23,6 +24,9 @@ class AppWidget extends StatelessWidget {
       showPerformanceOverlay: showPerformanceOverlay,
       theme: AppThemes.light,
       routerConfig: router,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }

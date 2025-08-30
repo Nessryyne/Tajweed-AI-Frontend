@@ -84,6 +84,8 @@ extension on SignUpBloc {
       accessToken: data.data?.access ?? '',
       refreshToken: data.data?.refresh ?? '',
     );
+    if (globalContext.mounted) globalContext.go("/home");
+
     emit(Success("Account activated"));
   }
 }

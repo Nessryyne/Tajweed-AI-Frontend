@@ -1,5 +1,6 @@
 import 'package:cg_core_defs/cg_core_defs.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' show WidgetsFlutterBinding;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:generic_requester/generic_requester.dart' show Dio;
@@ -19,6 +20,7 @@ final class AppBinding extends AppBindings {
   @override
   Future<void> asynchronous() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await EasyLocalization.ensureInitialized();
 
     //& Packages - Initialize SharedPreferences first
     final prefs = await SharedPreferences.getInstance();

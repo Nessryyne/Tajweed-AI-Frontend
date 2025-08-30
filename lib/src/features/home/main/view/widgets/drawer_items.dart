@@ -7,7 +7,9 @@ class _SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Align(
-    alignment: Alignment.centerLeft,
+    alignment: LocalizationManager.instance.isRTL
+        ? Alignment.centerRight
+        : Alignment.centerLeft,
     child: Text(
       title,
       style: AppStyles.subtitle.bold().copyWith(
@@ -115,8 +117,8 @@ class _SwitchItem extends StatelessWidget {
   );
 }
 
-class _commonTrailing extends StatelessWidget {
-  const _commonTrailing({super.key});
+class _CommonTrailing extends StatelessWidget {
+  const _CommonTrailing({super.key});
   @override
   Widget build(BuildContext context) => Icon(
     Icons.arrow_forward_ios,
@@ -131,8 +133,8 @@ class _NotificationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _DrawerItemBase(
       icon: Icons.notifications_outlined,
-      title: 'Notifications',
-      subtitle: 'Manage your notifications',
+      title: LocaleKeys.drawer_notifications.tr(),
+      subtitle: LocaleKeys.drawer_notifications_subtitle.tr(),
       iconColor: AppColors.success,
       trailing: Transform.scale(
         scale: 0.8,
@@ -147,8 +149,8 @@ class _ThemeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _DrawerItemBase(
     icon: Icons.dark_mode_outlined,
-    title: 'Dark Theme',
-    subtitle: 'Switch to dark mode',
+    title: LocaleKeys.drawer_theme.tr(),
+    subtitle: LocaleKeys.drawer_theme_subtitle.tr(),
     iconColor: AppColors.success,
     trailing: Transform.scale(
       scale: 0.8,
@@ -158,7 +160,7 @@ class _ThemeItem extends StatelessWidget {
 }
 
 class _LanguageItem extends StatelessWidget {
-  final String value;
+  final Observable<String> value;
   final List<String> languages;
   final ValueChanged<String?> onChanged;
   const _LanguageItem({
@@ -170,44 +172,49 @@ class _LanguageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _DrawerItemBase(
     icon: Icons.language_outlined,
-    title: 'Language',
-    subtitle: value,
+    title: LocaleKeys.drawer_language.tr(),
+    subtitle: value.value,
     iconColor: AppColors.success,
     trailing: Transform.scale(
       scale: 0.8,
-      child: DropdownButton<String>(
-        value: value,
-        isDense: true,
-        underline: const SizedBox.shrink(),
-        icon: Icon(
-          Icons.keyboard_arrow_down,
-          color: AppColors.success.withValues(alpha: 0.7),
-        ),
-        style: AppStyles.caption.semiBold().copyWith(color: AppColors.success),
-        dropdownColor: AppColors.success.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(AppMetrics.defaultRadius),
-        items: languages.map((lang) {
-          return DropdownMenuItem(
-            value: lang,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.language,
-                  size: 16,
-                  color: Colors.white.withValues(alpha: 0.9),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  lang,
-                  style: AppStyles.caption.semiBold().copyWith(
-                    color: Colors.white,
+      child: Observer(
+        observes: value,
+        builder: (context, v) => DropdownButton<String>(
+          value: v,
+          isDense: true,
+          underline: const SizedBox.shrink(),
+          icon: Icon(
+            Icons.keyboard_arrow_down,
+            color: AppColors.success.withValues(alpha: 0.7),
+          ),
+          style: AppStyles.caption.semiBold().copyWith(
+            color: AppColors.success,
+          ),
+          dropdownColor: AppColors.success.withValues(alpha: 0.95),
+          borderRadius: BorderRadius.circular(AppMetrics.defaultRadius),
+          items: languages.map((lang) {
+            return DropdownMenuItem(
+              value: lang,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.language,
+                    size: 16,
+                    color: Colors.white.withValues(alpha: 0.9),
                   ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
-        onChanged: onChanged,
+                  const SizedBox(width: 8),
+                  Text(
+                    lang,
+                    style: AppStyles.caption.semiBold().copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+          onChanged: onChanged,
+        ),
       ),
     ),
   );
@@ -218,10 +225,10 @@ class _HelpItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _DrawerItemBase(
     icon: Icons.help_outline,
-    title: 'Help & Support',
-    subtitle: 'Get help and support',
+    title: LocaleKeys.drawer_help.tr(),
+    subtitle: LocaleKeys.drawer_help_subtitle.tr(),
     iconColor: AppColors.warning,
-    trailing: const _commonTrailing(),
+    trailing: const _CommonTrailing(),
   );
 }
 
@@ -230,9 +237,9 @@ class _AboutItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _DrawerItemBase(
     icon: Icons.info_outline,
-    title: 'About',
-    subtitle: 'About the app',
+    title: LocaleKeys.drawer_about.tr(),
+    subtitle: LocaleKeys.drawer_about_subtitle.tr(),
     iconColor: AppColors.warning,
-    trailing: const _commonTrailing(),
+    trailing: const _CommonTrailing(),
   );
 }

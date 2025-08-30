@@ -7,13 +7,16 @@ class _AccountSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _SectionHeader(title: 'Account', color: AppColors.info),
+        _SectionHeader(
+          title: LocaleKeys.drawer_account.tr(),
+          color: AppColors.info,
+        ),
         _DrawerItemBase(
           icon: Icons.person_outline,
-          title: 'Profile Settings',
-          subtitle: 'Personal information & settings',
+          title: LocaleKeys.drawer_profile_settings.tr(),
+          subtitle: LocaleKeys.drawer_profile_settings_subtitle.tr(),
           iconColor: AppColors.info,
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          trailing: const _CommonTrailing(),
         ),
         VerticalSpacing(AppMetrics.spacing.xs),
         const Divider(),
@@ -37,18 +40,18 @@ class PreferencesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _SectionHeader(title: 'Preferences', color: AppColors.success),
+        _SectionHeader(
+          title: LocaleKeys.drawer_preferences.tr(),
+          color: AppColors.success,
+        ),
         _NotificationItem(),
         VerticalSpacing(AppMetrics.spacing.xs),
         _ThemeItem(),
         VerticalSpacing(AppMetrics.spacing.xs),
-        Observer(
-          observes: selectedLanguage,
-          builder: (context, value) => _LanguageItem(
-            value: value,
-            languages: languages,
-            onChanged: onLanguageChanged,
-          ),
+        _LanguageItem(
+          value: selectedLanguage,
+          languages: languages,
+          onChanged: onLanguageChanged,
         ),
         VerticalSpacing(AppMetrics.spacing.xs),
         const Divider(),
@@ -59,14 +62,20 @@ class PreferencesSection extends StatelessWidget {
 
 class _LogoutSection extends StatelessWidget {
   final VoidCallback onTap;
-  const _LogoutSection({super.key, required this.onTap});
+  final bool isLoading;
+  const _LogoutSection({
+    super.key,
+    required this.onTap,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       child: OutlinedLoadingButton(
-        title: 'Log Out',
+        title: LocaleKeys.drawer_logout.tr(),
+        isLoading: isLoading,
         titleFontSize: 16,
         textColor: AppColors.error,
         borderGradient: LinearGradient(
@@ -92,7 +101,7 @@ class _AppVersionFooter extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Text(
-        'Tajweed AI v1.0.0',
+        '${LocaleKeys.app_name.tr()} v1.0.0',
         style: AppStyles.caption.copyWith(
           color: AppColors.greyRegular.withValues(alpha: 0.6),
         ),
@@ -109,7 +118,10 @@ class _SupportSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _SectionHeader(title: 'Support', color: AppColors.warning),
+        _SectionHeader(
+          title: LocaleKeys.drawer_support.tr(),
+          color: AppColors.warning,
+        ),
         _HelpItem(),
         _AboutItem(),
       ],
