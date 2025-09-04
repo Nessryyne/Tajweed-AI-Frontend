@@ -24,7 +24,14 @@ class MainScreen extends Feature<MainBloc, MainStates> {
       observes: bloc.selectedLanguage,
       builder: (_, _) => Scaffold(
         drawer: MainDrawer(),
-        appBar: AppBar(title: Text(bloc.screenTitle)),
+        appBar: AppBar(
+          title: Text(bloc.screenTitle),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(AppMetrics.defaultRadius),
+            ),
+          ),
+        ),
         body: child,
         bottomNavigationBar: SimpleBottomNavBar(
           selectedIndex: bloc.currentIndex,

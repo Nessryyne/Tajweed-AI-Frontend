@@ -9,7 +9,13 @@ final router = GoRouter(
   navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'root'),
   initialLocation: AppConfig.initialRoute,
   debugLogDiagnostics: true,
-  routes: [mainShellRoute, signInRoute, signUpRoute, forgotPasswordRoute],
+  routes: [
+    mainShellRoute,
+    signInRoute,
+    signUpRoute,
+    forgotPasswordRoute,
+    profileScreenRoute,
+  ],
 );
 
 BuildContext globalContext = router.routerDelegate.navigatorKey.currentContext!;

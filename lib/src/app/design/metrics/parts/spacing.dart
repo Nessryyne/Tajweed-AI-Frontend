@@ -7,6 +7,8 @@ class _Spacing {
   final double xs = 8;
   final double sm = 16;
 
+  final double lgSm = 20;
+
   // Medium spacing
   final double md = 24;
   final double lg = 32;

@@ -15,11 +15,7 @@ class MainDrawer extends SubWidget<MainBloc> {
       child: Column(
         children: [
           // Profile Header Section
-          ProfileHeader(
-            userName: bloc.userName,
-            userEmail: bloc.userEmail,
-            photoUrl: bloc.photoUrl,
-          ),
+          ProfileHeader(userName: bloc.userName, userEmail: bloc.userEmail),
           // Scrollable Content Section
           SingleChildScrollView(
             child: Column(

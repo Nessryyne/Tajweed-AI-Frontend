@@ -1,6 +1,7 @@
 import '../../../../../base/bloc/exports.dart';
 import '../../../../../core/managers/localization_manager.dart';
 import '../../../../auth/2_sign_in/router/sign_in_route.dart';
+import '../../../profile/router/profile_route.dart';
 import '../../datasource/main_datasource.dart';
 import '../events/main_events.dart';
 import '../states/main_states.dart';
@@ -27,7 +28,6 @@ class MainBloc extends BaseBloc<MainEvents, MainStates> {
   final MainDataSource mainDataSource;
   String get userName => 'John Doe';
   String get userEmail => 'john.doe@example.com';
-  String get photoUrl => 'https://via.placeholder.com/150';
 
   String get screenTitle => routes[currentIndex].substring(1).toUpperCase();
 
@@ -36,9 +36,7 @@ class MainBloc extends BaseBloc<MainEvents, MainStates> {
   void changeLanguage(String? language) =>
       add(ChangeLanguageEvent(language, globalContext));
   void logout() => add(LogoutEvent());
-  void changeToProfileSettings() {
-    //TODO:     globalContext.go("/profile-settings");
-  }
+  void changeToProfileSettings() => globalContext.push(profileScreenRoute.path);
 
   MainBloc(this.mainDataSource) : super(MainInitial()) {
     on<ChangeTabEvent>(_onChangeTab);
