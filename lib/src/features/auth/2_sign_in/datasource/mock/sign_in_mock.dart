@@ -10,3 +10,14 @@ Map<String, dynamic> _mockSignInWithEmailAndPassword() => {
     "refresh": "mock_refresh_token_456",
   },
 };
+
+/// Creates mock social login data
+///
+Map<String, dynamic> _mockSocialLogin() => {
+  "success": true,
+  "info": "Social login successful",
+  "data": {
+    "access": "mock_social_access_token_789",
+    "refresh": "mock_social_refresh_token_012",
+  },
+};
