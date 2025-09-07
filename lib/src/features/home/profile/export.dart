@@ -1,6 +1,12 @@
+export 'binding/profile_deps.dart';
+export 'data/models/profile_model.dart';
+export 'datasource/profile_datasource.dart';
 export 'router/profile_route.dart';
 export 'view/screen/profile_screen.dart';
-
-
-
-
+export 'view/screen/widgets/profile_screen_body.dart';
+export 'view/screen/widgets/profile_items.dart';
+export 'view/screen/widgets/profile_sections.dart';
+export 'view/snackbars/_index.dart';
+export 'vm/bloc/profile_bloc.dart';
+export 'vm/events/profile_events.dart';
+export 'vm/states/profile_states.dart';

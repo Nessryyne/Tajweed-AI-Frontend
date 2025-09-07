@@ -5,6 +5,7 @@ class _Spacing {
 
   // Small spacing
   final double xs = 8;
+  final double xsSm = 12;
   final double sm = 16;
 
   final double lgSm = 20;

@@ -11,6 +11,7 @@ class BirthFieldPicker extends StatelessWidget {
     required this.onDateSelected,
     required this.date,
     this.width,
+    required Observable<DateTime> selectedBirthdayObs,
   });
 
   @override

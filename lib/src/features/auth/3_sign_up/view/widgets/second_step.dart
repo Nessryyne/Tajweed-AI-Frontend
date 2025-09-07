@@ -65,6 +65,7 @@ class _Step2 extends StatelessWidget {
             Observer(
               observes: birthDate,
               builder: (BuildContext context, value) => BirthFieldPicker(
+                selectedBirthdayObs: birthDate,
                 onDateSelected: (d) {
                   birthDate.value = d;
                 },

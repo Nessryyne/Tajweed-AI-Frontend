@@ -4,5 +4,5 @@ import '../view/screen/profile_screen.dart';
 
 final profileScreenRoute = GoRoute(
   path: "/profile",
-  builder: (context, state) => const ProfileScreen(),
+  builder: (context, state) => ProfileScreen(),
 );
