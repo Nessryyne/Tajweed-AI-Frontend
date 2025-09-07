@@ -170,13 +170,13 @@ final class SignInDataSourceImpl extends DataSource
         throw Exception('Failed to get authorization');
       }
 
-      final String accessToken = authorization.accessToken;
-      if (accessToken.isEmpty) {
+      final String? idToken = currentUser.authentication.idToken;
+      if (idToken == null) {
         throw Exception('Failed to get access token');
       }
 
-      Debugger.green('Got access token: ${accessToken.substring(0, 20)}...');
-      return accessToken;
+      Debugger.green('Got access token: ${idToken.substring(0, 20)}...');
+      return idToken;
     } on Exception catch (e) {
       Debugger.red('Google Sign-In failed: ${e.toString()}');
       throw Exception('Google Sign-In failed: ${e.toString()}');
