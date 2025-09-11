@@ -20,7 +20,6 @@ class SignInBody extends SubWidget<SignInBloc> {
   @override
   Widget build(BuildContext context) => AuthBody(
     buttonTitle: LocaleKeys.auth_sign_in.tr(),
-    onButtonTap: bloc.signInWithEmailAndPassword,
     isLoading: state is Loading,
     showOrDivider: true,
     showSocialLogin: true,
@@ -30,6 +29,7 @@ class SignInBody extends SubWidget<SignInBloc> {
     onAccountQuestionTap: () => globalContext.go(signUpRoute.path),
     guestQuestionFirstText: LocaleKeys.auth_or_continue_as.tr(),
     guestQuestionSecondText: LocaleKeys.auth_guest.tr(),
+    onButtonTap: bloc.signInWithEmailAndPassword,
     onGuestQuestionTap: bloc.continueAsGuest,
     onGoogleTap: bloc.signInWithGoogle,
     onFacebookTap: bloc.signInWithFacebook,

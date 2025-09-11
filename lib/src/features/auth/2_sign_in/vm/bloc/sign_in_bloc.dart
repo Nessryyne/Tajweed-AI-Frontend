@@ -5,6 +5,7 @@ import '../../../../../base/screens/exports.dart'
 import 'package:tajweed_ai/src/utils/input_validator.dart';
 
 import '../../../../../base/bloc/exports.dart';
+import '../../data/enums/social_login_enum.dart';
 import '../../data/models/sign_in_model.dart';
 import '../../datasource/sign_in_datasource.dart';
 import '../events/sign_in_events.dart';

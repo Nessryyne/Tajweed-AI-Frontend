@@ -9,6 +9,12 @@ final class Idle extends SignInState {}
 
 final class Loading extends SignInState {}
 
+final class GoogleLoadingState extends SignInState {}
+
+final class FacebookLoadingState extends SignInState {}
+
+final class AppleLoadingState extends SignInState {}
+
 final class Success extends SignInState {
   final String message;
 

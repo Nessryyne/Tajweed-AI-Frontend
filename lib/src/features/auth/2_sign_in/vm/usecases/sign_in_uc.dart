@@ -46,7 +46,15 @@ extension on SignInBloc {
     SignInWithGoogle event,
     Emitter<SignInState> emit,
   ) async {
-    //TODO: Implement sign in with google
+    emit(GoogleLoadingState());
+    return await _signInDataSource
+        .socialLogin(SocialLoginSource.google)
+        .then(
+          (response) => response.fold(
+            (exception) => _handleSignInFailure(exception, emit),
+            (data) => _saveTokensAndEmitSuccess(data, emit),
+          ),
+        );
   }
 
   Future<void> _signInWithFacebook(
